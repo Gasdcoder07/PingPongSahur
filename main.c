@@ -50,8 +50,9 @@ int main() {
   while (TRUE) {
     char c = getch();
     erase();
-    mvaddstr(BORDER_TOP, x / 2 - 20,
-             "Bienvenido a Ping Pong Sahur - 'E' para salir");
+    mvaddstr(BORDER_TOP, x / 2 - 20, "Bienvenido a Ping Pong Sahur - 'E' para salir");
+    mvprintw(BORDER_TOP, 10, "You - %d", rectangle1.score);
+    mvprintw(BORDER_TOP, x - 20, "Enemy - %d", enemy.score);
     // Marco
     mvvline(6, 10, ACS_VLINE, y - BORDER_TOP - BORDER_BOTTOM - 1);
     mvvline(6, x - 10, ACS_VLINE, y - BORDER_TOP - BORDER_BOTTOM - 1);
