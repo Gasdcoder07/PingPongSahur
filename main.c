@@ -84,8 +84,8 @@ int main() {
     if (ball.posY >= y - BORDER_BOTTOM) ball.vY = -1;
     if (ball.posY <= BORDER_TOP) ball.vY = 1;
 
-    if (ball.posX <= 20 && ball.posY >= rectangle1.posY && ball.posY <= y - rectangle1.posY + rectangle1.height) ball.vX *= -1;
-    if (ball.posX >= x - 20 && ball.posY >= enemy.posY && ball.posY <= y - enemy.posY + enemy.height) ball.vX *= -1;
+    if (ball.posX <= 20 && ball.posY >= rectangle1.posY && ball.posY <= rectangle1.posY + rectangle1.height) ball.vX *= -1;
+    if (ball.posX >= x - 20 && ball.posY >= enemy.posY && ball.posY <= enemy.posY + enemy.height) ball.vX *= -1;
 
     // Score validations
 
@@ -104,12 +104,20 @@ int main() {
       rectangle1.score++;
     }
 
+    if (enemy.score == 5 || rectangle1.score == 5) {
+      break;
+    }
+
     ball.posX += ball.vX;
     ball.posY += ball.vY;
     enemy.posY += vyEnemy;
     refresh();
-    napms(20);
+    napms(30);
   }
+
+  erase();
+  printw("Ha terminado el juego");
+  refresh();
   // Obtiene el caracter
   curs_set(1);
   return 0;
