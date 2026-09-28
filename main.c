@@ -40,7 +40,7 @@ int main() {
   initialize();
   int y, x;
   getmaxyx(stdscr, y, x);
-  Ball ball = {0, 0, 1, 1};
+  Ball ball = {BORDER_LEFT + 1, BORDER_TOP + 1, 1, 1};
   Rectangle rectangle1 = {y / 2 - 2, 5, 0};
   Rectangle enemy = {y / 2 - 2, 5, 0};
   // Macro que almacena en las variables y & x la altura y ancho máximos de la
@@ -78,6 +78,13 @@ int main() {
     if (enemy.posY <= BORDER_TOP + 2)
       vyEnemy = 1;
 
+    if (ball.posX >= x - BORDER_RIGHT) ball.vX = -1;
+    if (ball.posX <= BORDER_LEFT) ball.vX = 1;
+    if (ball.posY >= y - BORDER_BOTTOM) ball.vY = -1;
+    if (ball.posY <= BORDER_TOP) ball.vY = 1;
+
+    ball.posX += ball.vX;
+    ball.posY += ball.vY;
     enemy.posY += vyEnemy;
     refresh();
     napms(30);
