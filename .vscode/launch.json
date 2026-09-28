@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Volumes/PortableSSD/Projects/personal",
+      "program": "/Volumes/PortableSSD/Projects/personal/build/Debug/outDebug"
+    }
+  ]
+}
