@@ -40,7 +40,7 @@ int main() {
   initialize();
   int y, x;
   getmaxyx(stdscr, y, x);
-  Ball ball = {BORDER_LEFT + 1, BORDER_TOP + 1, 1, 1};
+  Ball ball = {y / 2, x / 2, 1, 1};
   Rectangle rectangle1 = {y / 2 - 2, 5, 0};
   Rectangle enemy = {y / 2 - 2, 5, 0};
   // Macro que almacena en las variables y & x la altura y ancho máximos de la
@@ -84,11 +84,31 @@ int main() {
     if (ball.posY >= y - BORDER_BOTTOM) ball.vY = -1;
     if (ball.posY <= BORDER_TOP) ball.vY = 1;
 
+    if (ball.posX <= 20 && ball.posY >= rectangle1.posY && ball.posY <= y - rectangle1.posY + rectangle1.height) ball.vX *= -1;
+    if (ball.posX >= x - 20 && ball.posY >= enemy.posY && ball.posY <= y - enemy.posY + enemy.height) ball.vX *= -1;
+
+    // Score validations
+
+    if (ball.posX < 20) {
+      ball.posX = x / 2;
+      ball.posY = y / 2;
+      ball.vX = 1;
+      ball.vY = 1;
+      enemy.score++;
+    }
+    if (ball.posX > x - 20) {
+      ball.posX = x / 2;
+      ball.posY = y / 2;
+      ball.vX = 1;
+      ball.vY = 1;
+      rectangle1.score++;
+    }
+
     ball.posX += ball.vX;
     ball.posY += ball.vY;
     enemy.posY += vyEnemy;
     refresh();
-    napms(30);
+    napms(20);
   }
   // Obtiene el caracter
   curs_set(1);
